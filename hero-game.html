@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Game</title>
+</head>
+<script>
+    class Hero {
+        constructor(nome, idade, tipo) {
+            this.nome = nome;
+            this.idade = idade;
+            this.tipo = tipo;
+
+            switch(tipo) {
+                case "mago":
+                    this.ataque = "magia";
+                break;
+                case "ninja":
+                this.ataque = "shuriken";
+                break;
+                case "monge":
+                this.ataque = "artes marciais";
+                break;
+                case "guerreiro":
+                this.ataque = "espada";
+                break;
+            }
+        }
+
+        atacar() {
+            console.log(`O ${this.tipo} atacou usando ${this.ataque}.`);
+            alert(`O ${this.tipo} atacou usando ${this.ataque}`);
+        }
+
+        falar() {
+            console.log(this.nome + " falou alguma coisa!");
+            alert(this.nome + " falou alguma coisa!");
+        }
+
+        ver_regiao(elemento){
+            console.log(`${this.nome} observa ${elemento}.`);
+            alert(`${this.nome} observa ${elemento}.`);
+        }
+    }
+
+    function valida_tipo(tipo) {
+        let resultado = false;
+        if(tipo.toLowerCase()=="guerreiro" || tipo.toLowerCase()=="monge" || tipo.toLowerCase()=="ninja" || tipo.toLowerCase()=="mago")
+            resultado = true;
+
+        return resultado;
+    }
+
+    let guerreiro_cadastrado = false;
+    let nome = prompt("Digite o nome do herói: ");
+    if (nome.length > 0) {
+        let idade = parseInt(prompt("Digite a idade do herói: "));
+        if (idade > 0) {
+            let tipo = prompt("Digite o tipo de herói (monge|ninja|guerreiro|mago): ");
+            if(tipo.length > 0) {
+                if(valida_tipo(tipo)) {
+                    let heroi = new Hero(nome, idade, tipo);
+                    let elemento = "nada";
+                    let opcao = parseInt(prompt("Digite uma opção: \n\n1. Atacar\n2. Ver região\n 3.Falar\n 4.Sair\n\nOpção: "));
+                    while(opcao != 4 && opcao != 0) {
+                        switch(opcao) {
+                            case 1:
+                                heroi.atacar();
+                            break;
+                            case 2:
+                                elemento = (Math.random() > 0.5? "nada":"um ogro enorme");
+                                heroi.ver_regiao(elemento);
+                            break;
+                            case 3:
+                                heroi.falar();
+                            break;
+                        }
+                        opcao = parseInt(prompt("Digite uma opção: \n\n1. Atacar\n2.Ver região\n3.Falar\n4.Sair\n\nOpção: "));
+                        
+                    }
+                } else {
+                    alert("Tipo incorreto!");
+                }
+            }
+        }
+    }
+
+</script>
+<body>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaNzXJjg5o8kxswWKbBgcYHh9BJlg97AxoDw&usqp=CAU" width="100%" height="100%" />
+</body>
+</html>
